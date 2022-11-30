@@ -49,7 +49,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 Requirements: Most recent LTS version of Node. If you cannot install this version of Node on your machine, you can code/pseudo-code to the best of your ability.
 
-This is an example project that presents you with a made-up scenario that will mimic some of the tasks that may need to be completed on a daily basis at PCI. It is intended to allow you to showcase your experience. If at any point something is unclear, please list it within this README. If you make any assumptions along the way, list those here as well. Also feel free to write anything else here that you would like considered when we review your approach. Do not install any new packages. We should be able to view your UI after running "npm install" and "npm start". Do not make any changes to the data source "near-earth-asteroids.json".
+This is an example project that presents you with a made-up scenario that will mimic some of the tasks that may need to be completed on a daily basis at PCI. It is intended to allow you to showcase your experience. If at any point something is unclear, please list it within this README. If you make any assumptions along the way, list those here as well. Also feel free to write anything else here that you would like considered when we review your approach. Do not install any new packages. We should be able to view your UI after running "npm install" and "npm start". Do not make any changes to the data source "near-earth-asteroids.json". If you feel you cannot complete one of the tasks, please move on to the next one and explain in this README.
 
 ### Scenario
 
