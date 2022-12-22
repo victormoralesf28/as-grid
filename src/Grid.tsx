@@ -7,6 +7,7 @@ import "./Grid.css";
 
 import { formatNumber, formatDate } from "./Utils/FormatUtil";
 import { filterDate } from "./Utils/FilterGridUtil";
+import { useCallback, useRef } from "react";
 
 const columnDefs: ColDef[] = [
   {
@@ -14,6 +15,7 @@ const columnDefs: ColDef[] = [
     headerName: "Designation",
     sortable: true,
     filter: "text",
+    unSortIcon: true,
   },
   {
     field: "discovery_date",
@@ -27,6 +29,7 @@ const columnDefs: ColDef[] = [
       minValidYear: 2000,
       maxValidYear: 2022,
     },
+    unSortIcon: true,
   },
   {
     field: "h_mag",
@@ -34,6 +37,7 @@ const columnDefs: ColDef[] = [
     sortable: true,
     filter: "number",
     valueGetter: ({ data }) => formatNumber(data.h_mag),
+    unSortIcon: true,
   },
   {
     field: "moid_au",
@@ -41,6 +45,7 @@ const columnDefs: ColDef[] = [
     sortable: true,
     filter: "number",
     valueGetter: ({ data }) => formatNumber(data.moid_au),
+    unSortIcon: true,
   },
   {
     field: "q_au_1",
@@ -48,6 +53,7 @@ const columnDefs: ColDef[] = [
     sortable: true,
     filter: "number",
     valueGetter: ({ data }) => formatNumber(data.q_au_1),
+    unSortIcon: true,
   },
   {
     field: "q_au_2",
@@ -55,6 +61,7 @@ const columnDefs: ColDef[] = [
     sortable: true,
     filter: "number",
     valueGetter: ({ data }) => formatNumber(data.q_au_2),
+    unSortIcon: true,
   },
   {
     field: "period_yr",
@@ -62,6 +69,7 @@ const columnDefs: ColDef[] = [
     sortable: true,
     filter: "number",
     valueGetter: ({ data }) => formatNumber(data.period_yr),
+    unSortIcon: true,
   },
   {
     field: "i_deg",
@@ -69,6 +77,7 @@ const columnDefs: ColDef[] = [
     sortable: true,
     filter: "number",
     valueGetter: ({ data }) => formatNumber(data.i_deg),
+    unSortIcon: true,
   },
   {
     field: "pha",
@@ -77,6 +86,7 @@ const columnDefs: ColDef[] = [
     filter: "text",
     valueGetter: ({ data }) =>
       data.pha === "Y" ? "Yes" : data.pha === "N" ? "No" : "",
+    unSortIcon: true,
   },
   {
     field: "orbit_class",
@@ -84,18 +94,31 @@ const columnDefs: ColDef[] = [
     enableRowGroup: true,
     sortable: true,
     filter: "text",
+    unSortIcon: true,
   },
 ];
 
 const NeoGrid = (): JSX.Element => {
+  const gridRef: any = useRef();
+
+  const onBtSortOff = useCallback(() => {
+    gridRef.current.columnApi.applyColumnState({
+      defaultState: { sort: null },
+    });
+    gridRef.current.api.setFilterModel(null);
+  }, []);
+
   return (
     <div>
-      <h1>Near-Earth Object Overview</h1>
-      <div
-        className="ag-theme-alpine"
-        style={{ height: "calc(100vh - 64px)", width: "100%" }}
-      >
+      <header className="grid-header">
+        <h1 className="grid-header__title">Near-Earth Object Overview</h1>
+        <button className="grid-header__clear" onClick={onBtSortOff}>
+          Clear Filters and Sorters
+        </button>
+      </header>
+      <div className="ag-theme-alpine grid-content">
         <AgGridReact
+          ref={gridRef}
           rowData={data}
           columnDefs={columnDefs}
           gridOptions={{
