@@ -75,6 +75,8 @@ const columnDefs: ColDef[] = [
     headerName: "Potentially Hazardous",
     sortable: true,
     filter: "text",
+    valueGetter: ({ data }) =>
+      data.pha === "Y" ? "Yes" : data.pha === "N" ? "No" : "",
   },
   {
     field: "orbit_class",
