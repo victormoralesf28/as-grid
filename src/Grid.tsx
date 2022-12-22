@@ -6,17 +6,55 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 import "./Grid.css";
 
 const columnDefs: ColDef[] = [
-  { field: "designation", headerName: "Designation" },
-  { field: "discovery_date", headerName: "Discovery Date" },
-  { field: "h_mag", headerName: "H (mag)" },
-  { field: "moid_au", headerName: "MOID (au)" },
-  { field: "q_au_1", headerName: "q (au)" },
-  { field: "q_au_2", headerName: "Q (au)" },
-  { field: "period_yr", headerName: "Period (yr)" },
-  { field: "i_deg", headerName: "Inclination (deg)" },
-  { field: "pha", headerName: "Potentially Hazardous" },
-  { field: "orbit_class", headerName: "Orbit Class", enableRowGroup: true },
+  {
+    field: "designation",
+    headerName: "Designation",
+    sortable: true,
+    filter: "text",
+  },
+  {
+    field: "discovery_date",
+    headerName: "Discovery Date",
+    sortable: true,
+  },
+  { field: "h_mag", headerName: "H (mag)", sortable: true, filter: "number" },
+  {
+    field: "moid_au",
+    headerName: "MOID (au)",
+    sortable: true,
+    filter: "number",
+  },
+  { field: "q_au_1", headerName: "q (au)", sortable: true, filter: "number" },
+  { field: "q_au_2", headerName: "Q (au)", sortable: true, filter: "number" },
+  {
+    field: "period_yr",
+    headerName: "Period (yr)",
+    sortable: true,
+    filter: "number",
+  },
+  {
+    field: "i_deg",
+    headerName: "Inclination (deg)",
+    sortable: true,
+    filter: "number",
+  },
+  {
+    field: "pha",
+    headerName: "Potentially Hazardous",
+    sortable: true,
+    filter: "text",
+  },
+  {
+    field: "orbit_class",
+    headerName: "Orbit Class",
+    enableRowGroup: true,
+    sortable: true,
+    filter: "text",
+  },
 ];
+
+const parseToNumber = (number: string | undefined) =>
+  number ? parseFloat(number) : null;
 
 const NeoGrid = (): JSX.Element => {
   return (
@@ -27,7 +65,17 @@ const NeoGrid = (): JSX.Element => {
         style={{ height: "calc(100vh - 64px)", width: "100%" }}
       >
         <AgGridReact
-          rowData={data}
+          rowData={data.map((item) => {
+            return {
+              ...item,
+              h_mag: parseToNumber(item.h_mag),
+              moid_au: parseToNumber(item.moid_au),
+              q_au_1: parseToNumber(item.q_au_1),
+              q_au_2: parseToNumber(item.q_au_2),
+              period_yr: parseToNumber(item.period_yr),
+              i_deg: parseToNumber(item.i_deg),
+            };
+          })}
           columnDefs={columnDefs}
           gridOptions={{
             animateRows: true,
