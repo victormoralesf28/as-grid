@@ -64,3 +64,9 @@ Within this repo is a demo UI that our team needs to make some changes to before
 7. Lastly, this grid is going to go to production soon, and other developers will begin doing work on this project. While creating this demo, considerations were not made to keep the code clean and organized. Please organize this codebase so that it is easier to find and make changes to components, as well as finding any interfaces, types, or helper functions.
 
 After completing this project, please push any changes you made to a publicly accessible GitLab or GitHub repository and include that link in an email to your contact at PCI. Thank you!
+
+### Comments
+
+- For task 5, I cannot implement "copy the information from grid" because this feature is only allowed with ag-grid-enterprise and this package is not installed in the project
+
+Reference: https://ag-grid.com/react-data-grid/clipboard
